@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>회원가입페이지</title>
+        <meta charset="utf-8">
+        <link href="main.css" rel="stylesheet" type="text/css"></link>
+    </head>
+    <body>
+        <header><div id = "title"><h1>Welcome to internet-programing shop</h1>
+        <p><a href="login.html">로그인</a> 회원가입</p>
+    </div>
+    </header>
+    <section>
+        <ul>
+            <li><p>개인정보 (필수)</p></li>
+            <li><label>이름: <input type="text" autofocus required></label></li>
+            <li><label>생일: <input type="date" required></label></li>
+            <li><label>학년: <input type="number" min="1" max = "4" required></label></li>
+            <li><label>전화번호: <input type="text" pattern="(010)-\d{3,4}-\d{4}" maxlength="15" placeholder="010-####-####" required></label></li>
+            <li><label>유저 아이디: <input type="text" autocomplete="on" required></label></li>
+            <li><label>비밀번호: <input type="text" required></label></li>
+            <li><label>비밀번호 확인: <input type="text" required></label></li>
+        </ul>
+        
+    </section>
+    <footer>
+        <button type="submit" class="a" onclick="location.href='login.html'">
+            signup
+        </button>
+        <button type="submit" class="b">
+            cancel
+        </button>
+    </footer>
+
+        
+    </body>
+</html>
