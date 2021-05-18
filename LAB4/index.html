@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>main page</title>
+    <meta charset="utf-8">
+    <link href="main.css" rel="stylesheet" type="text/css">
+    </link>
+    <script>
+        fetch('https://2020147502.github.io/HomeworkRepository/LAB4/product.json').then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            let products = json;
+            init(products);
+            for(var i=0;i<products.length;i++){
+                showProduct(products[i]);
+            }
+
+            }
+        ).catch(function (err) {
+            console.log(err.message);
+        });
+        function init(products) {
+            var category = document.querySelector('#category');
+            var search = document.querySelector('#search');
+            var searchBtn = document.querySelector('button');
+            var main = document.querySelector('main');
+            var lastCategory = category.value;
+            var lastSearch = '';
+            var categoryGroup;
+            var finalGroup;
+            var finalGroup = products;
+            for (let i = 0; i < finalGroup.length; i++) {
+                        console.log(finalGroup[0].src);
+                        objectURL = finalGroup[i].src;
+                        showProduct(finalGroup[i]);}
+            const mainscroll = document.querySelector('main');
+            const log = document.getElementById('log');
+            mainscroll.onscroll = logScroll;
+            function logScroll(e) {
+                if(e.target.scrollTop>e.target.scrollHeight*0.3){
+                    init(products)
+}
+            }
+            searchBtn.onclick = result;
+
+            function result(e) {
+                e.preventDefault();
+                categoryGroup = [];
+                finalGroup = [];
+                if (category.value === lastCategory && search.value.trim() === lastSearch) {
+                    return;
+                } else {
+                    lastCategory = category.value;
+                    lastSearch = search.value.trim();
+                    if (category.value === 'All') {
+                        categoryGroup = products;
+                        selectProducts();
+                    } else {
+                        let lowerCaseType = category.value.toLowerCase();
+                        for (let i = 0; i < products.length; i++) {
+                            if (products[i].type === lowerCaseType) {
+                                categoryGroup.push(products[i]);
+                            }
+                        }
+                        selectProducts();
+                    }
+                }
+            }
+            function selectProducts() {
+                if (search.value.trim() === '') {
+                    finalGroup = categoryGroup;
+                    updateDisplay();
+                } else {
+                    let lowerCaseSearchTerm = search.value.trim().toLowerCase();
+                    for (let i = 0; i < categoryGroup.length; i++) {
+                        if (categoryGroup[i].name.indexOf(lowerCaseSearchTerm) !== -1) {
+                            finalGroup.push(categoryGroup[i]);
+                        }
+                    }
+                    updateDisplay();
+                }
+
+            }
+            function updateDisplay() {
+                while (main.firstChild) {
+                    main.removeChild(main.firstChild);
+                }
+                if (finalGroup.length === 0) {
+                    const para = document.createElement('p');
+                    para.textContent = 'No results to display!';
+                    main.appendChild(para);
+                } else {
+                    for (let i = 0; i < finalGroup.length; i++) {
+                        console.log(finalGroup[0].src);
+                        objectURL = finalGroup[i].src;
+                        showProduct(finalGroup[i]);
+
+                    }
+                }
+            }
+
+            function showProduct(product) {
+                const section = document.createElement('section');
+                const image = document.createElement('img');
+                const year = document.createElement('h2');
+                const title = document.createElement('h2');
+                year.textContent = `${product.year}year`;
+                title.textContent = `${product.name}`;
+                section.setAttribute('class', product.type);
+                section.setAttribute('id', product.name);
+                year.setAttribute('id', product.year);
+                year.hidden = true;
+                title.hidden = true;
+                image.src = product.src;
+                image.alt = product.name;
+                image.onclick = function () {
+                    if (year.hidden === true) {
+                        year.hidden = false;
+                        title.hidden = false;
+                    }
+                    else {
+                        year.hidden = true;
+                        title.hidden = true;
+                    }
+                }
+              
+                main.appendChild(section);
+                section.appendChild(image);
+                section.appendChild(year);
+                section.appendChild(title);
+            }
+        }
+    </script>
+
+<body>
+    <header class="index">
+        <h1 class="indextitle">Welcome to Album Shop</h1>
+        <p><a href = "index.html">메인페이지 </a><a href="login.html">로그인</a> <a href = "signup.html">회원가입</a></p>
+    </header>
+    <section>
+        <div id="indexside">
+            <form>
+                <aside id="searchbar">
+                    <div>
+                        <label for="category">Choose album type</label><br>
+                        <select id="category">
+                            <option selected value="All">All</option>
+                            <option value="single">single</option>
+                            <option value="regular">regular</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="search">search album name</label>
+                        <input type="text" id="search" placeholder="예시:lilac">
+                    </div>
+                    <div>
+                        <button id="index">result</button>
+
+                    </div>
+
+                </aside>
+            </form>
+        </div class="infinite">
+        <main></main>
+        </div>
+    </section>
+</body>
+<script>
+
+</script>
+
+</html>
