@@ -1,0 +1,149 @@
+h1{
+    font-family: 궁서체;
+    font-size: 50px;
+    text-align: center;
+    width: 1000px;
+}
+.url{
+    
+    text-decoration: none;
+    
+}
+.footer{
+    display: flex;
+}
+.info{
+    margin:auto;
+    font-size: 5px;
+
+}
+.explain{
+    position:absolute;
+    top:0px;
+    right:50px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 10%;
+    margin:0;
+    padding-left: 5px;
+}
+.titleurl{
+    margin:auto;
+}
+.url:hover{
+    text-decoration:underline red;
+}
+h2{
+    width:1000px;
+    font-size: 20px;
+    border-bottom: 3px solid;
+}
+body{
+    font-size: 20px;
+    height: auto;
+    margin: 0 auto;
+    padding: 30px;
+    width: 1000px;
+    text-align:left;
+    box-sizing: border-box;
+    background-image:url("image/배경.jpg");
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
+main{
+    width:610px;
+    height:500px;
+    overflow: scroll;
+    border:5px solid;
+    padding-top:10px;
+    padding-left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section.single{
+    width:45%;
+    height:150px;
+    position:relative;
+    margin:5px;
+    margin-bottom: 60px;
+    display:block;
+   
+}
+section img{
+    width:150px;
+    height:150px;
+    border:2px solid;
+    border-radius:10%;
+    
+}
+section.regular{
+    width:45%;
+    height:150px;
+    position:relative;
+    margin:5px;
+    display:block;
+    margin-bottom: 60px;
+    
+}
+header.index{
+    height:auto;
+    width: 990px;
+    border: 5px solid;
+}
+select{
+    margin:0;
+    text-align: left;
+    align-items:flex-start;
+}
+aside#searchbar{
+    width:fit-content;
+    font-size: 40px;
+    line-height: 50px;
+
+}
+
+button{
+    display:block;
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    border:1px skyblue solid;
+    margin:0 auto;
+    border-radius: 5%;
+
+}
+button.a{
+    background-color:green;
+}
+button.b{
+    background-color: brown;
+}
+button.c{
+    background-color:blue;
+}
+
+p.box{
+    width:400px;
+    height:500px;
+    border: 5px solid black;
+    position:static;
+}
+p.title{
+    text-align: left;
+}
+#sb{
+    width:300px;
+    border: 5px solid;
+    font-size:20px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    margin-right:50px;
+}
+#indexside{
+    display: flex;
+    width:1000px;
+    margin-bottom: 70px;
+}

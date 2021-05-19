@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>main page</title>
+    <meta charset="utf-8">
+    <link href="main.css" rel="stylesheet" type="text/css">
+    </link>
+    <script>
+        fetch('https://2020147502.github.io/HomeworkRepository/LAB4/product.json').then(function (response) {
+            return response.json();
+        }).then(function (json) {
+            let products = json;
+            init(products);
+            for(var i=0;i<products.length;i++){
+                showProduct(products[i]);
+            }
+
+            }
+        ).catch(function (err) {
+            console.log(err.message);
+        });
+        function init(products) {
+            var category = document.querySelector('#category');
+            var search = document.querySelector('#search');
+            var searchBtn = document.querySelector('button');
+            var main = document.querySelector('main');
+            var lastCategory = category.value;
+            var lastSearch = '';
+            var categoryGroup;
+            var finalGroup;
+            var finalGroup = products;
+            for (let i = 0; i < finalGroup.length; i++) {
+                        console.log(finalGroup[0].src);
+                        objectURL = finalGroup[i].src;
+                        showProduct(finalGroup[i]);}
+            const mainscroll = document.querySelector('main');
+            const log = document.getElementById('log');
+            mainscroll.onscroll = logScroll;
+            function logScroll(e) {
+                if(e.target.scrollTop>e.target.scrollHeight*0.3){
+                    init(products)
+}
+            }
+            searchBtn.onclick = result;
+
+            function result(e) {
+                e.preventDefault();
+                categoryGroup = [];
+                finalGroup = [];
+                if (category.value === lastCategory && search.value.trim() === lastSearch) {
+                    return;
+                } else {
+                    lastCategory = category.value;
+                    lastSearch = search.value.trim();
+                    if (category.value === 'All') {
+                        categoryGroup = products;
+                        selectProducts();
+                    } else {
+                        let lowerCaseType = category.value.toLowerCase();
+                        for (let i = 0; i < products.length; i++) {
+                            if (products[i].type === lowerCaseType) {
+                                categoryGroup.push(products[i]);
+                            }
+                        }
+                        selectProducts();
+                    }
+                }
+            }
+            function selectProducts() {
+                if (search.value.trim() === '') {
+                    finalGroup = categoryGroup;
+                    updateDisplay();
+                } else {
+                    let lowerCaseSearchTerm = search.value.trim().toLowerCase();
+                    for (let i = 0; i < categoryGroup.length; i++) {
+                        if (categoryGroup[i].name.indexOf(lowerCaseSearchTerm) !== -1) {
+                            finalGroup.push(categoryGroup[i]);
+                        }
+                    }
+                    updateDisplay();
+                }
+
+            }
+            function updateDisplay() {
+                while (main.firstChild) {
+                    main.removeChild(main.firstChild);
+                }
+                if (finalGroup.length === 0) {
+                    const para = document.createElement('p');
+                    para.textContent = 'No results to display!';
+                    main.appendChild(para);
+                } else {
+                    for (let i = 0; i < finalGroup.length; i++) {
+                        console.log(finalGroup[0].src);
+                        objectURL = finalGroup[i].src;
+                        showProduct(finalGroup[i]);
+
+                    }
+                }
+            }
+
+            function showProduct(product) {
+                const section = document.createElement('section');
+                const image = document.createElement('img');
+                const text = document.createElement('p');
+                section.setAttribute('class', product.type);
+                text.setAttribute('class','explain');
+                image.src = product.src;
+                image.alt = product.name;
+                text.innerHTML = `
+                엘범 이름: ${product.name}<br>
+                엘범 타입: ${product.type}<br>
+                발매년도: ${product.year}`;
+                text.hidden = true;
+                image.onclick = function () {
+                    if (text.hidden === true) {
+                        text.hidden = false;
+                    }
+                    else {
+                        text.hidden = true;
+                    }
+                }
+              
+                main.appendChild(section);
+                section.appendChild(image);
+                section.appendChild(text);
+            }
+        }
+    </script>
+
+<body>
+    <header class="index">
+        <h1 class="indextitle">Welcome to Market Kurly</h1>
+    </header>
+    <div class="titleurl">
+        <p class="title"><a class="url" href="index.html">메인페이지 </a><a class="url" href="login.html">로그인</a> <a class="url" href="signup.html">회원가입</a></p>
+    </div>
+    <div id="indexside">
+        <aside id="searchbar">
+            <form id='sb'>
+                <div>
+                    <label for="category">Choose album type</label><br>
+                    <select id="category">
+                        <option selected value="All">All</option>
+                        <option value="single">single</option>
+                        <option value="regular">regular</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="search">search album name</label>
+                    <input type="text" id="search" placeholder="예시:lilac">
+                </div>
+                <div>
+                    <button id="index">result</button>
+                </div>
+            </form>
+        </aside>
+    <div><main></main></div>  
+    
+    </div>
+    <footer>
+        <h2>판매자 정보와 기타서비스</h2><br>
+        <div class = 'footer'>
+            <p class="info">사업자정보<br>
+                서울특별시 광진구 
+                대표이사 차승엽<br>
+                이메일 funlol@naver.com<br>
+                사업자등록번호 2020-1475-02<br>
+                </p>
+            <p class="info">고객센터쇼핑<br>
+                 1234-5678|도서 1234-5678|엘범 1234-5678 |콘서트 1234-5678<br>
+                팩스 02-0516-0918<br>
+                서울 광진구 엘범마켓 고객센터</p>
+            <p class="info"><span class='span'>전자금융거래 분쟁처리담당정보</span><br>
+                쇼핑 1234-5678 도서 1234-5678 티켓 1234-5678 팩스 02-0516-0918<br>
+                이메일 abcde@yonsei.ac.kr<br>
+                개인정보보호책임자 abcde@yonsei.ac.kr</p>
+        </div>
+    </footer>
+</body>
+<script>
+
+</script>
+
+</html>
